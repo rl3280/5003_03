@@ -45,3 +45,14 @@ The articles emphasize that brief mindfulness helps teachers adopt a non-judgmen
   * Provide simple visual focus states (`:focus-visible`) for accessibility without aggressive outline borders.
 * **Empowering Summary Display:**
   * Conclude the session with a minimal summary card highlighting a key self-care or self-compassion theme. Using CSS card layouts (`border-radius`, subtle drop shadows), present a single actionable takeaway or positive reflection to help the teacher return to their classroom with improved emotional regulation.
+
+**Key UI/UX Techniques for Fixed-Dimension Apps**
+
+1. aspect-ratio: 4 / 5; property:
+   Using aspect-ratio: 4 / 5 alongside max-width: 1080px and max-height: 1350px ensures that even if a desktop or mobile screen is smaller than 1080px wide, the container will scale down proportionally without distorting the 4:5 vertical layout.
+
+2. Scaling Content with Fluid Units (clamp() or vh/vw relative to canvas):
+   Since the dimensions are fixed, use relative sizing for text and padding (such as font-size: clamp(1rem, 2.5vw, 1.75rem);) so text stays well-proportioned if the canvas scales down on smaller mobile displays.
+
+3. Preventing Content Overflow:
+   Setting overflow: hidden on .app-canvas prevents scrollbars from ruining the immersive experience during the 2-minute session.
