@@ -1,0 +1,53 @@
+/* Reset and ensure the viewport occupies full device screen */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: #0b0f12; /* Dark ambient background outside the app frame */
+  overflow: hidden; /* Prevents unwanted full-page scrollbars */
+}
+
+/* Parent container: Centers the app frame on any screen size */
+.app-viewport {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+/* The locked 1080x1350 canvas frame */
+.app-canvas {
+  /* 1. Dimensions and Aspect Ratio */
+  width: 100%;
+  max-width: 1080px;
+  max-height: 1350px;
+  aspect-ratio: 4 / 5; /* Enforces 1080:1350 proportion dynamically */
+
+  /* 2. Visual & Layout Controls */
+  background-color: #12181b; /* Internal app dark background */
+  border-radius: 24px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden; /* Clips any overflowing elements inside the canvas */
+}
+
+/* Flex layout inside canvas so content fills height naturally */
+.app-header {
+  padding: 2rem;
+  flex-shrink: 0;
+}
+
+.app-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
