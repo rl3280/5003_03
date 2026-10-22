@@ -98,9 +98,6 @@ These tags allow teachers to add the app directly to their smartphone home scree
 </head>
 
 ```
-
-# Corrected Code
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -147,3 +144,5 @@ These tags allow teachers to add the app directly to their smartphone home scree
   </div>
 </body>
 </html>
+# Corrected Code
+
