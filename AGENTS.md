@@ -10,11 +10,7 @@
 
 Taylor et al. (2021) and Roeser et al. (2012) emphasize that teachers face high attentional demands and executive function fatigue. Scrolling, shifting layouts, or sticky elements create micro-friction that breaks attentional focus.
 
-** Visual CSS Literature Grounding:**
-
-Taylor et al. (2021) and Roeser et al. (2012) emphasize that teachers face high attentional demands and executive function fatigue. Scrolling, shifting layouts, or sticky elements create micro-friction that breaks attentional focus.
-
-** Content Presentation & UI Elements Literature Grounding**
+**Content Presentation & UI Elements Literature Grounding**
 
 Birtwell et al. (2021) and Gold et al. (2010) show that short, focused mindfulness interventions require uninterrupted presence to achieve cognitive reappraisal. Media distractions during the timed exercise destroy efficacy.
 
