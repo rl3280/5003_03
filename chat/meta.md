@@ -99,7 +99,7 @@ These tags allow teachers to add the app directly to their smartphone home scree
 
 ```
 
-#Corrected Code
+# Corrected Code
 
 <!DOCTYPE html>
 <html lang="en">
