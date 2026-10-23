@@ -50,7 +50,7 @@ Teachers experience chronic executive function demands and severe time poverty (
   3. `data-step="recharge"`: Cognitive reappraisal and classroom return summary (Taylor et al., 2016).
 - **Non-Intrusive Progress Indicator:**
   - Standard `<progress>` element locked at the top of `.app-canvas` to communicate time certainty (strictly 2 minutes).
->>>>>>> b22dec4f8f15d426ec16fb3c2f07fdb5dec4cb9a
+
 
 ---
 
