@@ -1,14 +1,20 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
+
   <!-- 1. Technical Basics -->
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#12181b">
+  <title>Erratic Enfants | A brief classroom reset</title>
+  <meta name="description" content="A brief, supportive reset for first-year teachers.">
+
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
   <!-- 2. SEO & Target Audience -->
   <title>Erratic Enfants | A 2 minute break from your students</title>
-  <meta name="description" content="A quick, 2-minute classroom wellbeing reset designed for first-year teachers to manage stress, reduce cognitive overload, and regain emotional calm.">
+  
   <meta name="keywords" content="first year teacher stress, teacher wellbeing, classroom mindfulness, 2 minute teacher reset">
   
   <!-- 3. Social Sharing (Open Graph) -->
@@ -31,89 +37,227 @@
 
   <!-- High-Resolution Touch Icon for Mobile Home Screens -->
   <link rel="apple-touch-icon" href="https://gravatar.com/userimage/11521900/d6bcfacd816d69a3e2a8c430d245de04.jpeg?size=180">
-  
 
   <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
 </head>
-
 <body>
   <div class="app-viewport">
-<main class="app-canvas">
+    <main class="app-canvas">
+      <header class="app-header" id="app-header" hidden>
+        <progress
+          id="reset-progress"
+          value="0"
+          max="3"
+          aria-label="Reset progress"
+        ></progress>
+        <p
+          class="countdown-watch"
+          id="timer-display"
+          role="timer"
+          aria-label="Time remaining"
+        >0:10</p>
+      </header>
 
-  <!-- 1. Landing Screen (Active on initial load) -->
-  <section class="app-landing" id="app-landing">
-    <!-- Breathing animation container active on load -->
-    <div class="breathe" aria-label="Calming breathing exercise"></div>
-  </section>
+      <div class="app-body">
+<section
+  class="focus-stage"
+  id="stage-land"
+  data-step="land"
+  aria-label="A pirate ship rising and falling on moonlit waves"
+  tabindex="-1"
+>
+  <svg
+    class="land-scene"
+    viewBox="0 0 300 330"
+    preserveAspectRatio="xMidYMid meet"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <defs>
+      <linearGradient id="land-sky" x1="0" y1="0" x2="0" y2="1">
+        <stop class="sky-top" offset="0"/>
+        <stop class="sky-low" offset="1"/>
+      </linearGradient>
+    </defs>
 
-  <!-- 2. Header (Hidden on landing, appears when step-1 starts) -->
-  <header class="app-header" id="app-header" hidden>
-    <div class="progress-container">
-      <progress id="reset-progress" value="1" max="3" aria-label="Step progress"></progress>
-    </div>
-    <div class="countdown-watch" id="timer-display" aria-live="polite">0:10</div>
-  </header>
+    <rect width="300" height="192" fill="url(#land-sky)"/>
 
-  <!-- 3. Dynamic Step Sections Area -->
-  <div class="app-body">
+    <circle class="land-star" cx="30" cy="28" r="1.2"/>
+    <circle class="land-star" cx="120" cy="20" r="1"/>
+    <circle class="land-star" cx="190" cy="44" r="1.2"/>
+    <circle class="land-star" cx="250" cy="24" r="1"/>
+    <circle class="land-star" cx="270" cy="86" r="1.2"/>
+    <circle class="land-star" cx="40" cy="130" r="1"/>
+    <circle class="land-star" cx="220" cy="110" r="0.9"/>
 
-    <!-- STEP 1: Assessment / Triage -->
-    <section class="step" id="step-1" hidden>
-      <h4>I feel...</h4>
-      <div class="button-group">
-        <button type="button" class="btn-option" data-category="overworked">OVERWORKED</button>
-        <button type="button" class="btn-option" data-category="disrespected">DISRESPECTED</button>
-        <button type="button" class="btn-option" data-category="alone">ALONE</button>
+    <g class="land-moon">
+      <circle class="moon-glow" cx="80" cy="72" r="34"/>
+      <path class="moon-body" d="M80 52A20 20 0 0 0 80 92A30 30 0 0 1 80 52Z" transform="rotate(-25 80 72)"/>
+    </g>
+
+    <rect class="land-sea" y="190" width="300" height="140"/>
+    <path class="wave-back" d="M-40 198q20-8 40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0V330H-40Z"/>
+
+    <rect class="moon-glint" x="67" y="196" width="26" height="1.6" rx="0.8"/>
+    <rect class="moon-glint" x="71" y="202" width="18" height="1.6" rx="0.8"/>
+    <rect class="moon-glint" x="75" y="208" width="10" height="1.6" rx="0.8"/>
+
+    <g class="land-ship">
+      <path class="ship-line" d="M88 192L62 180"/>
+      <path class="ship-line" d="M160 58V192M122 96V192M212 112V176"/>
+      <path class="ship-sail" d="M139 92Q160 100 181 92L179 140Q160 148 141 140Z"/>
+      <path class="ship-sail" d="M146 70Q160 75 174 70L172 90Q160 94 148 90Z"/>
+      <path class="ship-sail" d="M104 110Q122 117 140 110L138 150Q122 156 106 150Z"/>
+      <path class="ship-sail" d="M198 120Q212 125 226 120L224 154Q212 158 200 154Z"/>
+      <path class="ship-hull" d="M88 192H232Q224 214 196 221H122Q94 216 88 192Z"/>
+      <path class="ship-hull" d="M200 176H232V192H200Z"/>
+      <path class="ship-hull" d="M160 58L184 63L160 69Z"/>
+      <rect class="ship-light" x="206" y="181" width="4" height="4"/>
+      <rect class="ship-light" x="214" y="181" width="4" height="4"/>
+      <rect class="ship-light" x="222" y="181" width="4" height="4"/>
+    </g>
+
+    <path class="wave-front" d="M-60 212q20-10 40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0t40 0V330H-60Z"/>
+  </svg>
+        </section>
+
+        <section
+          class="focus-stage"
+          id="stage-reflect"
+          data-step="reflect"
+          aria-labelledby="feeling-title"
+          tabindex="-1"
+          hidden
+        >
+          <div class="stage-content">
+            <div class="release-choice" id="reflect-choice">
+              <h1 id="feeling-title">I feel...</h1>
+              <div class="feeling-options" role="group" aria-label="Choose a feeling (optional)">
+                <button class="feeling-button" type="button" data-feeling="Overworked">
+                  OVERWORKED
+                </button>
+                <button class="feeling-button" type="button" data-feeling="Disrespected">
+                  DISRESPECTED
+                </button>
+                <button class="feeling-button" type="button" data-feeling="Alone">
+                  ALONE
+                </button>
+              </div>
+            </div>
+            <div class="overworked-source" id="overworked-source" hidden>
+              <h1 id="source-title">Too much to...</h1>
+              <fieldset class="source-options">
+                <legend class="visually-hidden">Choose a stress source</legend>
+                <label class="source-option">
+                  <input type="radio" name="environmental-source" value="Grade" data-environmental-variable>
+                  <span>GRADE</span>
+                </label>
+                <label class="source-option">
+                  <input type="radio" name="environmental-source" value="Plan" data-environmental-variable>
+                  <span>PLAN</span>
+                </label>
+                <label class="source-option">
+                  <input type="radio" name="environmental-source" value="Relax" data-environmental-variable>
+                  <span>RELAX</span>
+                </label>
+              </fieldset>
+            </div>
+            <div class="disrespected-source" id="disrespected-source" hidden>
+              <h1 id="upset-title">More respect from...</h1>
+              <fieldset class="source-options">
+                <legend class="visually-hidden">Choose who or what is upsetting you</legend>
+                <label class="source-option">
+                  <input type="radio" name="respect-source" value="Students/Parents" data-environmental-variable>
+                  <span>STUDENTS/PARENTS</span>
+                </label>
+                <label class="source-option">
+                  <input type="radio" name="respect-source" value="Administrators" data-environmental-variable>
+                  <span>ADMINISTRATORS</span>
+                </label>
+                <label class="source-option">
+                  <input type="radio" name="respect-source" value="Own Failings" data-environmental-variable>
+                  <span>OWN FAILINGS</span>
+                </label>
+              </fieldset>
+            </div>
+            <div class="alone-source" id="alone-source" hidden>
+              <h1 id="need-title">Need more...</h1>
+              <fieldset class="source-options">
+                <legend class="visually-hidden">Choose what you need more of</legend>
+                <label class="source-option">
+                  <input type="radio" name="alone-source" value="Connection" data-environmental-variable>
+                  <span>CONNECTION</span>
+                </label>
+                <label class="source-option">
+                  <input type="radio" name="alone-source" value="Support" data-environmental-variable>
+                  <span>SUPPORT</span>
+                </label>
+              </fieldset>
+            </div>
+          </div>
+        </section>
+
+        <section
+          class="focus-stage"
+          id="stage-release"
+          data-step="release"
+          aria-labelledby="release-title"
+          tabindex="-1"
+          hidden
+        >
+          <div class="stage-content">
+            <div class="release-practice" id="release-practice">
+              <h1 id="release-title">Release</h1>
+              <p class="feeling-summary" id="feeling-summary" aria-live="polite"></p>
+              <div class="breathing-guide" aria-hidden="true"></div>
+              <p class="instruction-text">
+                If it feels comfortable, breathe in gently, then breathe out slowly.
+                Return to your natural breathing whenever you like.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section
+          class="focus-stage"
+          id="stage-recharge"
+          data-step="recharge"
+          aria-labelledby="recharge-title"
+          tabindex="-1"
+          hidden
+        >
+          <div class="stage-content">
+            <h1 id="recharge-title">Recharge</h1>
+            <p class="instruction-text">
+              One difficult moment does not define your day. Return at your own pace.
+            </p>
+            <p class="recharge-humor">
+              May the copier be kind to you today.
+            </p>
+          </div>
+        </section>
       </div>
 
-      <!-- Sub-options for OVERWORKED -->
-      <div class="sub-panel" id="panel-overworked" hidden>
-        <h4>Too much to...</h4>
-        <label><input type="radio" name="stress-source" value="grade"> GRADE</label>
-        <label><input type="radio" name="stress-source" value="plan"> PLAN</label>
-        <label><input type="radio" name="stress-source" value="relax"> RELAX</label>
-      </div>
-
-      <!-- Sub-options for DISRESPECTED -->
-      <div class="sub-panel" id="panel-disrespected" hidden>
-        <h4>I'm upset at my...</h4>
-        <label><input type="radio" name="respect" value="students-parents"> STUDENTS / PARENTS</label>
-        <label><input type="radio" name="respect" value="administrators"> ADMINISTRATORS</label>
-        <label><input type="radio" name="respect" value="own-failings"> OWN FAILINGS</label>
-      </div>
-
-      <!-- Sub-options for ALONE -->
-      <div class="sub-panel" id="panel-alone" hidden>
-        <h4>A word that describes what you're feeling:</h4>
-        <input type="text" id="textbox-alone" placeholder="Type a word..." />
-      </div>
-    </section>
-
-    <!-- STEP 2: Tailored Micro-Intervention -->
-    <section class="step" id="step-2" hidden>
-      <!-- Content dynamically injected based on stress-source / respect / textbox-alone -->
-      <div id="tailored-activity-container"></div>
-    </section>
-
-    <!-- STEP 3: Humorous & Inspiring Closing -->
-    <section class="step" id="step-3" hidden>
-      <ul class="reflection-list">
-        <li><strong>Teacher Humor:</strong> Random teacher joke snippet</li>
-        <li><em>"You can't make this stuff up."</em> — A year from now, you'll look back & smile.</li>
-        <li>Teaching is one of the few honorable professions left.</li>
-      </ul>
-    </section>
-
-  </div>
-
-  <!-- 4. Footer Bar -->
-  <footer class="app-footer">
-    <span class="brand-title">Erratic Enfants</span>
-    <button id="btn-begin" type="button" class="reset-button">BEGIN</button>
-    <img src="https://gravatar.com/userimage/11521900/d6bcfacd816d69a3e2a8c430d245de04.jpeg?size=32" alt="App Favicon" class="app-favicon" />
-  </footer>
-
-</main>
+      <footer class="app-footer">
+        <img class="brand-logo" src="img/erratic-enfants.png" alt="Erratic Enfants" width="489" height="336">
+        <button
+          id="btn-launch"
+          type="button"
+          class="reset-button"
+        >
+          LAUNCH
+        </button>
+        <a class="app-mark" href="https://gravatar.com/ubercrawl" target="_blank" rel="noopener noreferrer" aria-label="Visit Erratic Enfants on Gravatar">
+  <img
+    src="https://gravatar.com/userimage/11521900/d6bcfacd816d69a3e2a8c430d245de04.jpeg?size=64"
+    alt=""
+    width="32"
+    height="32"
+  >
+</a>
+      </footer>
+    </main>
   </div>
 </body>
 </html>
