@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Campus Creative Fair</title>
+  <link rel="stylesheet" href="practice.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="brand">
+      <p class="eyebrow">Student Life Week</p>
+      <h1>Campus Creative Fair</h1>
+    </div>
+
+    <nav class="main-nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#highlights">Highlights</a></li>
+        <li><a href="#schedule">Schedule</a></li>
+        <li><a href="#register">Register</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="page-layout">
+    <section class="hero" id="about">
+      <div class="hero-text">
+        <p class="tag">Free event · Open to all students</p>
+        <h2>Explore student projects, mini workshops, and creative performances.</h2>
+        <p>
+          The Campus Creative Fair brings together student clubs, local artists,
+          and campus teams for an afternoon of making, sharing, and learning.
+        </p>
+        <a class="button primary-button" href="#register">Reserve a spot</a>
+      </div>
+
+      <aside class="hero-panel">
+        <h3>Event details</h3>
+        <ul>
+          <li><strong>Date:</strong> Friday, October 18</li>
+          <li><strong>Time:</strong> 1:00 PM – 5:00 PM</li>
+          <li><strong>Location:</strong> Student Center Plaza</li>
+        </ul>
+      </aside>
+    </section>
+
+    <section class="info-section" id="highlights">
+      <div class="section-heading">
+        <p class="section-label">Highlights</p>
+        <h2>What you can do at the fair</h2>
+      </div>
+
+      <div class="card-grid">
+        <article class="card featured">
+          <p class="card-type">Workshop</p>
+          <h3>Design Your Own Zine</h3>
+          <p>
+            Learn how to organize ideas visually and create a one-page zine
+            using simple materials.
+          </p>
+          <a href="#">See materials</a>
+        </article>
+
+        <article class="card">
+          <p class="card-type">Exhibit</p>
+          <h3>Student Art Showcase</h3>
+          <p>
+            Walk through a collection of digital illustration, photography,
+            and mixed-media student work.
+          </p>
+          <a href="#">View featured artists</a>
+        </article>
+
+        <article class="card">
+          <p class="card-type">Performance</p>
+          <h3>Open Mic Hour</h3>
+          <p>
+            Listen to student poetry, acoustic music, and short spoken-word
+            performances on the outdoor stage.
+          </p>
+          <a href="#">Read performance guidelines</a>
+        </article>
+
+        <article class="card">
+          <p class="card-type">Booth</p>
+          <h3>Club Showcase</h3>
+          <p>
+            Meet campus organizations, talk with student leaders, and find
+            upcoming projects you can join.
+          </p>
+          <a href="#">See participating clubs</a>
+        </article>
+      </div>
+    </section>
+
+    <section class="info-section" id="schedule">
+      <div class="section-heading">
+        <p class="section-label">Schedule</p>
+        <h2>Afternoon plan</h2>
+      </div>
+
+      <div class="schedule-grid">
+        <div class="schedule-item">
+          <p class="time">1:00 PM</p>
+          <div class="schedule-details">
+            <h3>Welcome and opening activities</h3>
+            <p>Check in, pick up a map, and visit the interactive booths.</p>
+          </div>
+        </div>
+
+        <div class="schedule-item">
+          <p class="time">2:00 PM</p>
+          <div class="schedule-details">
+            <h3>Zine workshop begins</h3>
+            <p>Materials provided while supplies last.</p>
+          </div>
+        </div>
+
+        <div class="schedule-item important">
+          <p class="time">3:30 PM</p>
+          <div class="schedule-details">
+            <h3>Open mic performances</h3>
+            <p>Main stage seating opens 15 minutes before the program starts.</p>
+          </div>
+        </div>
+
+        <div class="schedule-item">
+          <p class="time">4:30 PM</p>
+          <div class="schedule-details">
+            <h3>Closing community showcase</h3>
+            <p>A short celebration of selected student projects and performances.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="info-section extras">
+      <div class="section-heading">
+        <p class="section-label">Before you go</p>
+        <h2>Helpful information</h2>
+      </div>
+
+      <div class="info-grid">
+        <article class="mini-card">
+          <h3>What to bring</h3>
+          <p>A student ID, water bottle, and anything you need for note-taking.</p>
+        </article>
+
+        <article class="mini-card">
+          <h3>Accessibility</h3>
+          <p>Quiet seating, ramp access, and support staff will be available on site.</p>
+        </article>
+
+        <article class="mini-card">
+          <h3>Food options</h3>
+          <p>Student dining and local vendors will be available near the plaza.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="info-section" id="register">
+      <div class="section-heading">
+        <p class="section-label">Registration</p>
+        <h2>Sign up to attend</h2>
+      </div>
+
+      <form class="signup-form">
+        <div class="form-row">
+          <label for="name">Full name</label>
+          <input id="name" name="name" type="text" placeholder="Jordan Lee" required />
+        </div>
+
+        <div class="form-row">
+          <label for="email">School email</label>
+          <input id="email" name="email" type="email" placeholder="name@university.edu" required />
+        </div>
+
+        <div class="form-row">
+          <label for="role">I am attending as</label>
+          <select id="role" name="role">
+            <option>Visitor</option>
+            <option>Performer</option>
+            <option>Club representative</option>
+            <option>Workshop participant</option>
+          </select>
+        </div>
+
+        <fieldset class="interests">
+          <legend>What are you most interested in?</legend>
+          <label><input type="checkbox" name="interest" value="art" /> Art</label>
+          <label><input type="checkbox" name="interest" value="music" /> Music</label>
+          <label><input type="checkbox" name="interest" value="workshops" /> Workshops</label>
+          <label><input type="checkbox" name="interest" value="community" /> Community groups</label>
+        </fieldset>
+
+        <div class="form-row">
+          <label for="notes">Questions or accessibility needs</label>
+          <textarea id="notes" name="notes" rows="4" placeholder="Write a short note here"></textarea>
+        </div>
+
+        <button type="submit" class="button secondary-button">Submit registration</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Campus Creative Fair · Student Center Plaza</p>
+    <p><a href="#">Contact the organizers</a></p>
+  </footer>
+</body>
+</html>
