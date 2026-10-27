@@ -198,24 +198,7 @@ Here is what I can compile and save into your notebook:
 > 2. **Pedagogical Framework:** Your three-phase instructional arc (**Model → ZoPD Scaffolding → Fade & Digital Portfolios**) incorporating Vygotsky, Cognitive Apprenticeship, and Stone’s NRCCTE principles.  
 > 3. **Curriculum Design Rules:** Unit 5 (40 hrs) and Unit 8 (8 hrs) integration strategy using real-world green construction trade scenarios (heat pumps, insulation R-values, solar output, material takeoffs).
 
-### **How to Resume Next Time**
-
-When you're rested and ready to resume:
-
-> * Simply ask me to **"Retrieve our Green Math curriculum design notebook"** or **"Open the NEW MC3 Green Math project."**  
-> * You can also give me a quick phrase like: *"Let's build out the day-by-day lesson plan for Unit 5 based on our saved notebook."*
-
-Would you like me to go ahead and create this Notebook for you now so it’s ready for your next session?
-
----
-
-*User prompt: yes, and name it 10-26 NEW MC3 Green Math*
-
-Response: I have created your notebook: 📚 [10-26 NEW MC3 Green Math](https://gemini.google.com/notebook/282d8b3c-37b7-4565-b7e6-0066219167b0)
-
-### **What Has Been Saved in Your Notebook:**
-
-> 1. **Strategic Messaging Matrix:** Complete funder alignment across **BlackRock**, **NYPA**, **NYSERDA**, **CHPE Green Economy Fund**, **NABTU / TradesFutures**, and **NEW**.  
+TradesFutures**, and **NEW**.  
 > 2. **Pedagogical Framework:** Your three-step instructional arc (**Model → ZoPD Scaffolding → Fade & Digital Portfolios**) incorporating Cognitive Apprenticeship and Vygotsky.  
 > 3. **Curriculum Design Strategy:** Integrated 48-hour delivery combining **MC3 Unit 5 (40 hrs Construction Math)** and **Unit 8 (8 hrs Green Construction)** through decarbonization audits, thermal calculations, and real-world estimating.
 
