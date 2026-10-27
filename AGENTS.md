@@ -1,61 +1,55 @@
-# UI/UX Guidelines for First-Year Teacher Wellbeing App
+# Erratic Enfants: Design and Implementation Guidelines
 
-The literature in your library offers rich, evidence-based insights into teacher stress, cognitive load, and brief mindfulness practices. You can translate these research findings into concrete HTML structure and CSS styling patterns to support a 2-minute wellness experience.
+## Product Vision
 
----
+Erratic Enfants is a brief, in-the-moment wellbeing reset for first-year public-school teachers. It should help a teacher pause during a demanding day, acknowledge what they are experiencing, practice a simple grounding activity, and return to the classroom with a little more steadiness.
 
-### 1. Structural HTML Design: Minimizing Cognitive Demands
-Research highlights that teachers face overwhelming daily attentional and executive functioning demands, leaving them with severe time constraints and limited planning time. The HTML layout must reduce cognitive load immediately upon opening the app.
+The experience is compassionate and practical, not clinical. Humor belongs in the closing Recharge stage as gentle levity. It should make room for a smile without minimizing the stress that came before it.
 
-* **Single-View Architecture (`<main>` Container):**
-  * Avoid complex navigation bars, dropdown menus, or multi-tab layouts. Provide a single full-screen `<main>` container that loads directly into the 2-minute experience.
-  * Use semantic HTML tags (`<header>`, `<section>`, `<footer>`) logically so screen readers and assistive tools process the page seamlessly.
-* **Sequential Step Sections (`<section class="step">`):**
-  * Break the 2-minute intervention into a clear 3-part micro-flow:
-    1. **Reflect/Acknowledge:** A simple prompt encouraging non-judgmental awareness of present stress.
-    2. **Release/Practice:** A focused micro-activity (e.g., progressive muscle relaxation or sensory grounding).
-    3. **Recharge/Intention:** A brief closing summary to transition back into the classroom.
-* **Micro-Progress Indicators (`<progress>` or `role="progressbar"`):**
-  * Include a non-intrusive progress bar at the top of the viewport. Knowing the activity strictly takes 2 minutes relieves the fear of losing precious prep or instructional time.
+## Core Experience: Land, Reflect, Release, Recharge
 
----
+The experience has four sequential stages. **Land** is the entry stage; **Reflect, Release, and Recharge** are the three stages of the reset itself.
 
-### 2. Visual CSS Design: Regulating Emotional & Physiological States
-Mindfulness interventions target the appraisal process and help "deactivate" immediate stress responses. Visual presentation directly impacts autonomic nervous system arousal.
+1. **Land (`data-step="land"`)**  
+   This is the first screen a teacher sees when they open the app. Offer a calm, uncluttered welcome and one clear action: **LAUNCH**. Do not show the reset progress indicator or countdown timer here. Those controls belong to the reset, which has not started yet. Activating LAUNCH begins Reflect.
 
-* **Color Palette & Lighting:**
-  * **Calming Hues:** Utilize soft, muted colors (such as slate blues, soft sage greens, or warm earthy neutrals) using CSS variables (`--bg-color`, `--accent-color`). Avoid stark, high-contrast pure white (`#FFF`) backgrounds or harsh red/alert tones that mimic classroom urgency or notifications.
-  * **Dark Mode / Low Luminance:** Apply low-luminance CSS styles to prevent screen glare, creating a visually restful environment for an exhausted teacher sitting at their desk.
-* **Typography & White Space:**
-  * **Generous Spacing:** Apply generous CSS padding, margins, and line height (`line-height: 1.6`) around text blocks.
-  * **Typography:** Use clean, sans-serif or soft rounded serif fonts with minimal copy per screen to reduce visual noise and prevent cognitive fatigue.
-* **Subtle, Rhythm-Based CSS Animations:**
-  * **Pacing Visuals:** Implement keyframe animations (such as a slowly expanding and contracting circle) to guide rhythmic breathing (e.g., 4-second inhale, 6-second exhale).
-  * **Smooth Transitions:** Set all screen or state changes to use smooth CSS transitions (`transition: all 0.5s ease-in-out`). Avoid sudden layout shifts, abrupt pop-ups, or jarring animations that trigger automatic stress responses.
+2. **Reflect (`data-step="reflect"`)**  
+   Invite the teacher to notice or name what is weighing on them without judgment. Use concise, validating language. Do not imply that the teacher is at fault or that a brief exercise will solve structural workplace problems.
 
----
+3. **Release (`data-step="release"`)**  
+   Guide a brief, optional grounding or breathing practice. A visual rhythm may support the activity, but instructions should remain understandable without animation. Keep the practice focused and easy to follow.
 
-### 3. Content Presentation & UI Elements: Fostering Adaptive Coping
-The articles emphasize that brief mindfulness helps teachers adopt a non-judgmental, accepting stance while addressing key themes like attentive awareness and relaxation.
+4. **Recharge (`data-step="recharge"`)**  
+   Offer a supportive thought or intention for returning to the classroom, paired with gentle, teacher-aware humor when appropriate. Humor follows acknowledgment and practice; it must not mock the teacher, students, families, or the difficulty of teaching.
 
-* **Distraction-Free UI (No Feeds or Social Elements):**
-  * While social media can contain self-care content, it often carries high cognitive noise and comparison traps. Hide unnecessary links, notifications, social share icons, or external feeds using CSS layout controls (`display: none` for non-essential controls during the 2-minute session).
-* **Bite-Sized Interaction Controls:**
-  * Use large, touch-friendly button elements (`<button>`) with clear, supportive microcopy (e.g., "Begin 2-Minute Reset" or "Release").
-  * Provide simple visual focus states (`:focus-visible`) for accessibility without aggressive outline borders.
-* **Empowering Summary Display:**
-  * Conclude the session with a minimal summary card highlighting a key self-care or self-compassion theme. Using CSS card layouts (`border-radius`, subtle drop shadows), present a single actionable takeaway or positive reflection to help the teacher return to their classroom with improved emotional regulation.
+The reset should take about two minutes, not including the time a teacher spends on the Land screen. Start the timer and reset progress only after LAUNCH begins the reset. Communicate the reset’s time commitment clearly once it has started. Do not present a short breathing cycle as if it were the entire reset.
 
-**Key UI/UX Techniques for Fixed-Dimension Apps**
+## Interaction and Structure
 
-1. aspect-ratio: 4 / 5; property:
+- Keep the experience in one view with no multi-page navigation, feeds, or unrelated controls.
+- Use one `<main class="app-canvas">` containing the experience. Represent each stage as a semantic section, preferably `<section class="focus-stage" data-step="...">`.
+- Show one stage at a time. Keep the transition from Land to Reflect clear and low-effort.
+- Do not require a stress questionnaire before the teacher can begin the reset. Personalization is optional; if used, keep it lightweight within Reflect so it does not delay or obstruct support.
+- Keep the timer and progress indicator out of Land. Initialize or reveal them when LAUNCH starts the reset, and keep their state consistent across Reflect, Release, and Recharge.
+- Use semantic HTML, descriptive labels, keyboard-accessible controls, and visible `:focus-visible` states.
+- Respect reduced-motion preferences. The experience must remain usable when animations are disabled.
 
-   Using aspect-ratio: 4 / 5 alongside max-width: 1080px and max-height: 1350px ensures that even if a desktop or mobile screen is smaller than 1080px wide, the container will scale down proportionally without distorting the 4:5 vertical layout.
+## Layout and Visual Direction
 
-2. Scaling Content with Fluid Units (clamp() or vh/vw relative to canvas):
+- Use a fixed 4:5 app canvas that scales to the available viewport without causing page scrolling. Keep the canvas usable on small screens; do not clip essential text or controls to preserve the aspect ratio.
+- Keep the layout stable as stages change. Place the reset progress indicator and timer near the top of the canvas during the reset, not on Land.
+- Use the project’s low-luminance, desaturated palette through CSS custom properties. Preserve existing palette variables unless a deliberate design revision is requested.
+- Favor readable type, generous spacing, short copy, and calm visual pacing. Avoid harsh alerts, busy decoration, and unnecessary motion.
+- Keep breathing visuals separate from text and mark purely decorative visuals as hidden from assistive technology.
 
-   Since the dimensions are fixed, use relative sizing for text and padding (such as font-size: clamp(1rem, 2.5vw, 1.75rem);) so text stays well-proportioned if the canvas scales down on smaller mobile displays.
+## Content and Tone
 
-3. Preventing Content Overflow:
+- Acknowledge stress plainly and without judgment.
+- Keep prompts short, supportive, and adult-to-adult; do not sound patronizing or overly cheerful.
+- Make every practice optional and avoid promising medical or therapeutic outcomes.
+- In Recharge, use humor as a small release after the teacher has been heard. Choose warmth and recognition over sarcasm, cynicism, or jokes that make light of harm.
+- End Recharge with a concise, encouraging transition back to the classroom.
 
-   Setting overflow: hidden on .app-canvas prevents scrollbars from ruining the immersive experience during the 2-minute session.
+## Implementation Alignment
+
+Keep stage names, `data-step` values, visible copy, timer behavior, and progress behavior consistent across markup, styles, and scripts. Land is the initial app stage, with LAUNCH as its action; the timer and reset progress begin only when the teacher launches. The reset then follows Reflect, Release, and Recharge in order. Do not add competing landing, triage, or closing flows.

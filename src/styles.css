@@ -1,168 +1,551 @@
-/* Keep the browser viewport separate from the centered app canvas. */
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 100%;
-  background-color: #0b0f12; /* Dark ambient background outside the app frame */
-  overflow: hidden; /* Prevents unwanted full-page scrollbars */
+:root {
+  --bg-primary: #12181b;
+  --bg-surface: #1e262b;
+  --bg-card: #283238;
+  --accent-sage: #8ab49c;
+  --accent-teal: #6db3b1;
+  --accent-lavender: #a3a7db;
+  --text-primary: #e0e6ed;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
 }
 
-/* Parent container: Centers the app frame on any screen size */
+* {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+  background: #0b0f12;
+  color: var(--text-primary);
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font: inherit;
+}
+
 .app-viewport {
   display: flex;
-  justify-content: center;
-  align-items: center;
   width: 100%;
   height: 100vh;
   height: 100dvh;
+  align-items: center;
+  justify-content: center;
   padding: 1rem;
-  box-sizing: border-box;
+  overflow: hidden;
 }
 
-/* A 4:5 canvas, capped at Instagram post dimensions and scaled to fit. */
 .app-canvas {
-  width: min(1080px, calc(100vw - 2rem), calc((100dvh - 2rem) * 4 / 5));
-  max-width: 1080px;
-  max-height: 1350px;
-  aspect-ratio: 4 / 5; /* Enforces 1080:1350 proportion dynamically */
-  box-sizing: border-box;
-  flex: none;
-
-  /* 2. Visual & Layout Controls */
-  background-color: #12181b; /* Internal app dark background */
-  border-radius: 24px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
   display: flex;
-  flex-direction: column;
   position: relative;
-  overflow: hidden; /* Clips any overflowing elements inside the canvas */
+  width: min(
+    1080px,
+    calc(100vw - 2rem),
+    calc((100dvh - 2rem) * 4 / 5)
+  );
+  max-height: 1350px;
+  aspect-ratio: 4 / 5;
+  flex: none;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 20px;
+  background: var(--bg-primary);
+  box-shadow: 0 20px 40px rgb(0 0 0 / 35%);
 }
 
-/* Flex layout inside canvas so content fills height naturally */
+@media (max-width: 420px) {
+  .app-canvas {
+    height: min(calc(100dvh - 2rem), max(28rem, 125vw));
+    aspect-ratio: auto;
+  }
+}
+
 .app-header {
-  padding: 2rem;
-  flex-shrink: 0;
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: clamp(0.65rem, 2vw, 1.25rem);
+}
+
+.app-header[hidden],
+.focus-stage[hidden],
+.reset-button[hidden] {
+  display: none;
+}
+
+.app-header progress {
+  width: min(70%, 24rem);
+  height: 0.55rem;
+  accent-color: var(--accent-lavender);
+}
+
+.countdown-watch {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  font-variant-numeric: tabular-nums;
 }
 
 .app-body {
-  flex: 1;
   display: flex;
+  min-height: 0;
+  flex: 1;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  padding: 2rem;
+  justify-content: center;
+  padding: clamp(0.65rem, 3vw, 2rem);
+  overflow: hidden;
 }
 
-/* 1. Root Variables: Desaturated, low-stimulation palette */
-:root {
-  /* Dark Slate / Charcoal Backgrounds (Avoid pure #000000) */
-  --bg-primary: #12181b;       /* Deep slate/charcoal base */
-  --bg-surface: #1e262b;       /* Elevated surface for cards/containers */
-  --bg-card: #283238;          /* Lightly elevated interactive surface */
-
-  /* Muted Accents & Calming Hues */
-  --accent-sage: #8ab49c;      /* Calming sage green for primary actions */
-  --accent-teal: #6db3b1;      /* Soft teal for secondary highlights */
-  --accent-lavender: #a3a7db;  /* Soft lavender for subtle indicators */
-
-  /* Readable Text Colors (Avoid pure #FFFFFF) */
-  --text-primary: #e0e6ed;     /* Soft off-white for primary headlines */
-  --text-secondary: #94a3b8;   /* Muted gray for body copy & subtext */
-  --text-muted: #64748b;       /* Subtle text for timers and footers */
-
-  /* Spacing and Borders */
-  --radius-smooth: 16px;       /* Soft, organic rounded corners */
-  --transition-speed: 0.4s ease-in-out;
-}
-
-/* 2. Global Layout & Reset */
-/* Clean, modern system font stack with zero download overhead */
-body {
-  font-family: 
-    -apple-system,              /* Safari / iOS (San Francisco) */
-    BlinkMacSystemFont,         /* Chrome / macOS */
-    "SF Pro Text",              /* Apple San Francisco */
-    "Segoe UI",                 /* Windows */
-    Roboto,                     /* Android */
-    Helvetica, Arial,           /* Fallback sans-serif */
-    sans-serif;
-  
-  /* Rendering optimizations for high-density mobile screens */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-
-  color: var(--text-primary);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  line-height: 1.8;
-  font-size: 1.1rem
-}
-
-/* 3. Single-View Container (Reduces Cognitive Load) */
-.wellbeing-container {
-  background-color: var(--bg-surface);
-  border-radius: var(--radius-smooth);
-  padding: 2rem;
-  max-width: 400px;
-  width: 90%;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+.focus-stage {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  transition: background-color var(--transition-speed);
+  --stage-accent: var(--accent-sage);
 }
 
-/* 4. Typography & Readable Content */
-h1 {
-  color: var(--text-primary);
-  font-size: 1.5rem;
-  font-weight: 500;
-  margin-bottom: 0.5rem;
+.focus-stage[data-step="release"] {
+  --stage-accent: var(--accent-teal);
 }
 
-p.instruction-text {
+.focus-stage[data-step="recharge"] {
+  --stage-accent: var(--accent-lavender);
+}
+
+.stage-content {
+  display: flex;
+  width: min(100%, 28rem);
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(0.45rem, 1.5vh, 0.8rem);
+}
+
+.stage-content h1,
+.stage-content p {
+  margin: 0;
+}
+
+.release-choice,
+.overworked-source,
+.disrespected-source,
+.alone-source,
+.release-practice {
+  display: flex;
+  width: 100%;
+  min-height: 0;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(0.55rem, 1.5vh, 0.8rem);
+}
+
+.overworked-source {
+  gap: clamp(1rem, 2.5vh, 1.4rem);
+}
+
+.feeling-options {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.source-options {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.source-options legend {
+  margin-bottom: 0.35rem;
   color: var(--text-secondary);
-  font-size: 1rem;
-  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
 }
 
-/* 5. Calming Micro-Interaction Control */
-.reset-button {
-  background-color: var(--accent-sage);
-  color: var(--bg-primary);
-  border: none;
-  border-radius: 24px;
-  padding: 0.85rem 1.75rem;
-  font-size: 1rem;
+.source-option {
+  display: flex;
+  min-height: 48px;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid var(--bg-card);
+  border-radius: 8px;
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+}
+
+.source-option:has(input:checked) {
+  border-color: var(--accent-sage);
+  background: var(--bg-card);
+}
+
+.source-option input {
+  width: 1.1rem;
+  height: 1.1rem;
+  flex: none;
+  margin: 0;
+  accent-color: var(--accent-sage);
+}
+
+.source-option:focus-within {
+  outline: 2px solid var(--text-primary);
+  outline-offset: 2px;
+}
+
+.feeling-button {
+  min-height: 48px;
+  width: 100%;
+  padding: 0.65rem 1rem;
+  border: 1px solid var(--accent-teal);
+  border-radius: 8px;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-size: 0.95rem;
   font-weight: 600;
   cursor: pointer;
-  transition: transform 0.2s ease, background-color var(--transition-speed);
+}
+
+.feeling-button:hover,
+.feeling-button:focus-visible {
+  background: var(--accent-teal);
+  color: var(--bg-primary);
+}
+
+.feeling-button:focus-visible {
+  outline: 2px solid var(--text-primary);
+  outline-offset: 2px;
+}
+
+.feeling-summary {
+  color: var(--accent-sage);
+  font-size: 0.95rem;
+}
+
+.release-practice .breathing-guide {
+  width: clamp(2.75rem, 10vmin, 5rem);
+}
+
+.release-practice .instruction-text {
+  max-width: 42ch;
+  font-size: clamp(0.85rem, 1.6vw, 1rem);
+}
+
+.stage-content h1 {
+  color: var(--text-primary);
+  font-size: clamp(1.2rem, 2vw, 1.8rem);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.instruction-text {
+  max-width: 36ch;
+  color: var(--text-secondary);
+  font-size: clamp(0.95rem, 1.8vw, 1.1rem);
+  line-height: 1.45;
+}
+
+.breathing-guide {
+  width: clamp(3.25rem, 14vmin, 8rem);
+  aspect-ratio: 1;
+  flex: none;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    var(--accent-teal),
+    var(--accent-sage) 72%
+  );
+  opacity: 0.8;
+  animation: breathe-cycle 10s infinite ease-in-out;
+}
+
+@keyframes breathe-cycle {
+  0%,
+  100% {
+    transform: scale(0.82);
+    opacity: 0.55;
+  }
+
+  40% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+}
+
+.stage-button,
+.reset-button {
+  min-height: 44px;
+  flex: none;
+  padding: 0.6rem 1.1rem;
+  border: 1px solid var(--stage-accent, var(--accent-sage));
+  border-radius: 10px;
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-size: clamp(0.85rem, 1.5vw, 0.95rem);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.reset-button {
+  border: 0;
+  background: var(--accent-sage);
+  color: var(--bg-primary);
+}
+
+.stage-button:hover,
+.stage-button:focus-visible {
+  background: var(--stage-accent, var(--accent-sage));
+  color: var(--bg-primary);
 }
 
 .reset-button:hover,
 .reset-button:focus-visible {
-  background-color: var(--accent-teal);
-  outline: none;
-  transform: scale(1.02);
+  background: var(--accent-teal);
 }
 
-/* 6. Soft Breathing Circle Animation */
-.breathing-guide {
-  width: 120px;
-  height: 120px;
-  margin: 2rem auto;
+.stage-button:focus-visible,
+.reset-button:focus-visible {
+  outline: 2px solid var(--text-primary);
+  outline-offset: 3px;
+}
+
+.recharge-humor {
+  color: var(--accent-lavender);
+  font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+}
+
+.app-footer {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: clamp(0.6rem, 2vw, 1.25rem);
+  border-top: 1px solid rgb(255 255 255 / 6%);
+}
+
+.brand-logo {
+  height: clamp(2rem, 8vw, 3.5rem);
+  width: auto;
+  flex: none;
+}
+
+.app-mark {
+  display: block;
+  width: 2rem;
+  aspect-ratio: 1;
+  flex: none;
+}
+
+.app-mark img {
+  display: block;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
-  background: radial-gradient(circle, var(--accent-sage) 0%, var(--accent-teal) 100%);
-  opacity: 0.8;
-  animation: breathe 10s infinite ease-in-out;
 }
 
-@keyframes breathe {
-  0%, 100% {
-    transform: scale(0.85);
-    opacity: 0.6;
+.app-mark:focus-visible {
+  outline: 2px solid var(--text-primary);
+  outline-offset: 3px;
+}
+@media (max-height: 520px) {
+  .app-viewport {
+    padding: 0.5rem;
   }
-  50% {
-    transform: scale(1.15);
-    opacity: 0.95;
+
+  .app-header,
+  .app-footer {
+    padding: 0.4rem 0.65rem;
+  }
+
+  .app-body {
+    padding: 0.35rem 0.65rem;
+  }
+
+  .stage-content {
+    gap: 0.35rem;
+  }
+
+  .release-choice,
+  .release-practice {
+    gap: 0.4rem;
+  }
+
+  .overworked-source {
+    gap: 0.75rem;
+  }
+
+  .disrespected-source {
+    gap: 0.75rem;
+  }
+
+  .alone-source {
+    gap: 0.75rem;
+  }
+
+  .source-options {
+    gap: 0.3rem;
+  }
+
+  .source-option {
+    min-height: 42px;
+    padding: 0.4rem 0.7rem;
+  }
+
+  .release-practice .instruction-text {
+    line-height: 1.3;
+  }
+
+  .feeling-options {
+    gap: 0.3rem;
+  }
+
+  .feeling-button {
+    min-height: 42px;
+    padding: 0.45rem 0.75rem;
+  }
+
+  .breathing-guide {
+    width: clamp(2.75rem, 10vmin, 3.5rem);
+  }
+
+  .instruction-text {
+    line-height: 1.35;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .breathing-guide {
+    animation: none;
+  }
+}
+.land-scene {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: 90%;
+  flex: none;
+  border-radius: 14px;
+  transform: translateY(6%);
+}
+
+.sky-top { stop-color: var(--bg-primary); }
+.sky-low { stop-color: var(--bg-card); }
+.land-sea { fill: var(--bg-surface); }
+.land-star { fill: var(--text-primary); opacity: 0.5; }
+.moon-glow { fill: var(--accent-sage); opacity: 0.12; }
+.moon-body { fill: var(--text-primary); opacity: 0.9; }
+.moon-glint { fill: var(--text-primary); opacity: 0.3; }
+
+.wave-back {
+  fill: var(--bg-surface);
+  stroke: var(--accent-teal);
+  stroke-opacity: 0.25;
+}
+
+.wave-front {
+  fill: var(--bg-primary);
+  stroke: var(--accent-sage);
+  stroke-opacity: 0.3;
+}
+
+.ship-hull {
+  fill: var(--bg-primary);
+  stroke: var(--accent-teal);
+  stroke-opacity: 0.45;
+}
+
+.ship-sail {
+  fill: var(--text-secondary);
+  fill-opacity: 0.22;
+  stroke: var(--accent-teal);
+  stroke-opacity: 0.4;
+}
+
+.ship-line {
+  fill: none;
+  stroke: var(--bg-primary);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+
+.ship-light { fill: var(--accent-sage); opacity: 0.85; }
+
+.land-moon { animation: land-moon 10s ease-in-out infinite; }
+
+.land-ship {
+  transform-origin: 160px 200px;
+  animation: land-ship 10s ease-in-out infinite;
+}
+
+.wave-back { animation: land-wave-back 10s ease-in-out infinite; }
+.wave-front { animation: land-wave-front 10s ease-in-out infinite; }
+
+@keyframes land-moon {
+  0%, 100% { transform: translateY(0); }
+  40% { transform: translateY(64px); }
+}
+
+@keyframes land-ship {
+  0%, 100% { transform: translateY(5px) rotate(-2.5deg); }
+  40% { transform: translateY(-13px) rotate(3.5deg); }
+}
+
+@keyframes land-wave-back {
+  0%, 100% { transform: translateY(1px); }
+  40% { transform: translateY(-5px); }
+}
+
+@keyframes land-wave-front {
+  0%, 100% { transform: translateY(2px); }
+  40% { transform: translateY(-10px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .land-moon,
+  .land-ship,
+  .wave-back,
+  .wave-front {
+    animation: none;
   }
 }
